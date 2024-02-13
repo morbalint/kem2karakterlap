@@ -1,4 +1,4 @@
-import {PageSizes, PDFDocument, PDFFont, PDFPage, rgb} from "pdf-lib";
+import {PDFDocument, PDFPage, rgb} from "pdf-lib";
 import fs from "fs/promises";
 import fontKit from "@pdf-lib/fontkit"
 
@@ -12,17 +12,21 @@ export async function Karlap() {
     const form = doc.getForm()
 
     const page0 = doc.getPage(0)
+    page0.setFont(pdfFont)
 
-    const addTextFieldToPage = (page: PDFPage) => (options: {name: string, x: number, y: number, w: number, h: number}) => {
+    const addTextFieldToPage = (page: PDFPage) => (options: {name: string, x: number, y: number, w: number, h: number, text?: string}) => {
         const field = form.createTextField(options.name)
-        field.addToPage(page0, {
+        field.setText(options.text)
+        field.addToPage(page, {
             x: options.x,
             y: options.y,
             font: pdfFont,
             borderColor: rgb(1,1,1),
+            borderWidth: 0,
             width: options.w,
             height: options.h,
         })
+        return field
     }
 
     const addTextField0 = addTextFieldToPage(page0)
@@ -261,6 +265,7 @@ export async function Karlap() {
         h: 14
     })
 
+    form.updateFieldAppearances(pdfFont)
     const pdfBytes = await doc.save()
 
     await fs.writeFile("karlap.pdf", pdfBytes)
