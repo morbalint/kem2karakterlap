@@ -4,7 +4,7 @@ import fontKit from "@pdf-lib/fontkit"
 
 
 export async function Karlap() {
-    const docBuffer = await fs.readFile("kem2karakterlap_minden.pdf", {encoding: null, flag: 'r'})
+    const docBuffer = await fs.readFile("kemkas2karakterlap.pdf", {encoding: null, flag: 'r'})
     const doc =  await PDFDocument.load(docBuffer)
     doc.registerFontkit(fontKit)
     const fontBuffer = await fs.readFile("fonts/Milonga-Regular.ttf", {encoding: null, flag: 'r'})
@@ -186,10 +186,31 @@ export async function Karlap() {
     })
     addTextField0({
         name: "hp_aktualis",
-        x: 203,
+        x: 202,
         y: 600,
         w: 170,
         h: 16
+    })
+    addTextField0({
+        name: "hp_aktualis_2",
+        x: 202,
+        y: 584,
+        w: 170,
+        h: 16
+    })
+    addTextField0({
+        name: "hp_aktualis_3",
+        x: 202,
+        y: 568,
+        w: 170,
+        h: 16
+    })
+    addTextField0({
+        name: "hp_aktualis_4",
+        x: 202,
+        y: 554,
+        w: 170,
+        h: 14
     })
 
     // Mentők
@@ -264,6 +285,266 @@ export async function Karlap() {
         w: 14,
         h: 14
     })
+
+    addTextField0({
+        name: "tamadas_bonusz_alap",
+        x: 141,
+        y: 503,
+        w: 38,
+        h: 16
+    })
+    addTextField0({
+        name: "tamadas_bonusz_ero",
+        x: 110,
+        y: 475,
+        w: 24,
+        h: 16
+    })
+    addTextField0({
+        name: "tamadas_bonusz_kozelharc",
+        x: 145,
+        y: 476,
+        w: 31,
+        h: 14
+    })
+    addTextField0({
+        name: "tamadas_bonusz_ugy",
+        x: 110,
+        y: 447,
+        w: 24,
+        h: 16
+    })
+    addTextField0({
+        name: "tamadas_bonusz_tavolsagi",
+        x: 145,
+        y: 448,
+        w: 31,
+        h: 14
+    })
+
+    addTextField0({
+        name: "fegyver_1",
+        x: 187,
+        y: 503,
+        w: 248,
+        h: 16
+    })
+    addTextField0({
+        name: "fegyver_2",
+        x: 187,
+        y: 475,
+        w: 248,
+        h: 16
+    })
+    addTextField0({
+        name: "fegyver_3",
+        x: 187,
+        y: 447,
+        w: 248,
+        h: 16
+    })
+    addTextField0({
+        name: "fegyver_4",
+        x: 187,
+        y: 419,
+        w: 248,
+        h: 16
+    })
+
+    addTextField0({
+        name: "tapasztalat",
+        x: 442,
+        y: 500,
+        w: 95,
+        h: 16
+    })
+    addTextField0({
+        name: "tapasztalat_2",
+        x: 442,
+        y: 484,
+        w: 95,
+        h: 16
+    })
+    addTextField0({
+        name: "tapasztalat_3",
+        x: 442,
+        y: 468,
+        w: 95,
+        h: 16
+    })
+    addTextField0({
+        name: "tapasztalat_4",
+        x: 442,
+        y: 452,
+        w: 95,
+        h: 16
+    })
+    addTextField0({
+        name: "tapasztalat_kovetkezo_szint",
+        x: 447,
+        y: 418,
+        w: 85,
+        h: 16
+    })
+
+    // kepzettseg elso oszlop
+    for (let i = 0; i < 6; i++) {
+        addTextField0({
+            name: `kepzettseg_${i}_nev`,
+            x: 57,
+            y: 390 - (i * 28.25),
+            w: 100,
+            h: 16
+        })
+        addTextField0({
+            name: `kepzettseg_${i}_alap`,
+            x: 161,
+            y: 390 - (i * 28.25),
+            w: 24,
+            h: 16
+        })
+        addTextField0({
+            name: `kepzettseg_${i}_bonusz`,
+            x: 195,
+            y: 390 - (i * 28.25),
+            w: 24,
+            h: 16
+        })
+        addTextField0({
+            name: `kepzettseg_${i}_osszes`,
+            x: 234,
+            y: 391 - (i * 28.25),
+            w: 14,
+            h: 14
+        })
+    }
+    // kepzettseg masodik oszlop
+    for (let i = 0; i < 6; i++) {
+        addTextField0({
+            name: `kepzettseg_${(i + 6)}_nev`,
+            x: 57+213,
+            y: 390 - (i * 28.25),
+            w: 100,
+            h: 16
+        })
+        addTextField0({
+            name: `kepzettseg_${(i + 6)}_alap`,
+            x: 161+213,
+            y: 390 - (i * 28.25),
+            w: 24,
+            h: 16
+        })
+        addTextField0({
+            name: `kepzettseg_${(i + 6)}_bonusz`,
+            x: 195+213,
+            y: 390 - (i * 28.25),
+            w: 24,
+            h: 16
+        })
+        addTextField0({
+            name: `kepzettseg_${(i + 6)}_osszes`,
+            x: 234+213,
+            y: 391 - (i * 28.25),
+            w: 14,
+            h: 14
+        })
+    }
+
+    addTextField0({
+        name: `arany`,
+        x: 475,
+        y: 387,
+        w: 63,
+        h: 14
+    })
+    addTextField0({
+        name: `arany_2`,
+        x: 475,
+        y: 373,
+        w: 63,
+        h: 14
+    })
+    addTextField0({
+        name: `arany_3`,
+        x: 475,
+        y: 361,
+        w: 63,
+        h: 12
+    })
+    addTextField0({
+        name: `elektrum`,
+        x: 475,
+        y: 387-56,
+        w: 63,
+        h: 14
+    })
+    addTextField0({
+        name: `elektrum_2`,
+        x: 475,
+        y: 373-56,
+        w: 63,
+        h: 14
+    })
+    addTextField0({
+        name: `elektrum_3`,
+        x: 475,
+        y: 361-56,
+        w: 63,
+        h: 12
+    })
+    addTextField0({
+        name: `ezust`,
+        x: 475,
+        y: 387-56-57,
+        w: 63,
+        h: 14
+    })
+    addTextField0({
+        name: `ezust_2`,
+        x: 475,
+        y: 373-56-57,
+        w: 63,
+        h: 14
+    })
+    addTextField0({
+        name: `ezust_3`,
+        x: 475,
+        y: 361-56-57,
+        w: 63,
+        h: 12
+    })
+
+    // viselt
+    for (let i = 0; i < 8; i++) {
+        addTextField0({
+            name: `viselt_${(i)}`,
+            x: 62,
+            y: 197 - (i * 19.75),
+            w: 143,
+            h: 16
+        })
+    }
+    // cipelt
+    for (let i = 0; i < 8; i++) {
+        addTextField0({
+            name: `cipelt_${(i)}`,
+            x: 227,
+            y: 197 - (i * 19.75),
+            w: 143,
+            h: 16
+        })
+    }
+    // aprosagok
+    for (let i = 0; i < 8; i++) {
+        addTextField0({
+            name: `aprosagok_${(i)}`,
+            x: 391,
+            y: 197 - (i * 19.75),
+            w: 143,
+            h: 16
+        })
+    }
+
 
     form.updateFieldAppearances(pdfFont)
     const pdfBytes = await doc.save()
