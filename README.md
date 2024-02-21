@@ -6,4 +6,4 @@ A projekt célja, a Kard és Mágia második kiadásához kitölthető PDF karak
 
 1. `yarn install`
 2. `tsc -w`
-3. `node dist/index.js`
+3. `node --watch dist/index.js`
