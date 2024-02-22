@@ -1,6 +1,6 @@
-import {RenderTextBoxFunc} from "./helpers";
+import {RenderTextFieldFunc} from "./helpers";
 
-export function renderSecondPage(addTextField: RenderTextBoxFunc): void {
+export function renderSecondPage(addTextField: RenderTextFieldFunc): void {
 
     // specialis kepessegek
     for (let i = 0; i < 7; i++) {

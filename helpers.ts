@@ -9,9 +9,9 @@ export interface TextFieldOptions {
     text?: string,
 }
 
-export type RenderTextBoxFunc = (options: TextFieldOptions) => PDFTextField;
+export type RenderTextFieldFunc = (options: TextFieldOptions) => PDFTextField;
 
-export function addTextFieldFactory(form: PDFForm, pdfFont: PDFFont, page: PDFPage): RenderTextBoxFunc {
+export function addTextFieldFactory(form: PDFForm, pdfFont: PDFFont, page: PDFPage): RenderTextFieldFunc {
     return (options: TextFieldOptions) => {
         const field = form.createTextField(options.name)
         field.setText(options.text)

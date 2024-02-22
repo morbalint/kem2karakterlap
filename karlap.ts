@@ -5,6 +5,12 @@ import {addTextFieldFactory} from "./helpers";
 import {renderMainPage} from "./renderMainPage";
 import {renderSecondPage} from "./renderSecondPage";
 import {renderFullCasterVarazslatlap, renderHalfCasterVarazslatlap} from "./renderVarazslatlap";
+import {
+    renderVarazskonyvFrontPage,
+    renderVarazskonyvLeftPage,
+    renderVarazskonyvRightPage,
+    renderVarazskonyvSecondPage
+} from "./renderVarazskonyv";
 
 export async function Karlap() {
     const docBuffer = await fs.readFile("kemkas2karakterlap.pdf", {encoding: null, flag: 'r'})
@@ -33,6 +39,26 @@ export async function Karlap() {
     page3.setFont(pdfFont)
     const addTextField3 = addTextFieldFactory(form, pdfFont, page3)
     renderHalfCasterVarazslatlap(addTextField3);
+
+    const page4 = doc.getPage(4)
+    page4.setFont(pdfFont)
+    const addTextField4 = addTextFieldFactory(form, pdfFont, page4)
+    renderVarazskonyvFrontPage(addTextField4);
+
+    const page5 = doc.getPage(5)
+    page5.setFont(pdfFont)
+    const addTextField5 = addTextFieldFactory(form, pdfFont, page5)
+    renderVarazskonyvSecondPage(addTextField5);
+
+    const page6 = doc.getPage(6)
+    page6.setFont(pdfFont)
+    const addTextField6 = addTextFieldFactory(form, pdfFont, page6)
+    renderVarazskonyvRightPage(addTextField6);
+
+    const page7 = doc.getPage(7)
+    page7.setFont(pdfFont)
+    const addTextField7 = addTextFieldFactory(form, pdfFont, page7)
+    renderVarazskonyvLeftPage(addTextField7);
 
     form.updateFieldAppearances(pdfFont)
     const pdfBytes = await doc.save()

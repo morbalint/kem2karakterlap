@@ -1,14 +1,17 @@
-import {PDFTextField} from "pdf-lib";
-import {TextFieldOptions} from "./helpers";
+import {RenderTextFieldFunc} from "./helpers";
+
+interface PreparedSpellsParams {
+    addTextField: RenderTextFieldFunc;
+    prefix: string;
+    varazslatszint: number;
+    xOffset: number;
+    yOffset: number;
+    max: number;
+    hasBonusz?: boolean;
+}
 
 function renderPreparedSpells(
-    addTextField: (options: TextFieldOptions) => PDFTextField,
-    prefix: string,
-    varazslatszint: number,
-    xOffset: number,
-    yOffset: number,
-    max: number,
-    hasBonusz?: boolean) {
+    {addTextField, prefix, varazslatszint, xOffset, yOffset, max, hasBonusz}: PreparedSpellsParams) {
     addTextField({
         name: `${prefix}_${varazslatszint}szintu_darab`,
         x: 194 + xOffset,
@@ -41,10 +44,13 @@ function renderPreparedSpells(
     })
 }
 
-function renderEgyszeriVarazslat(
-    addTextField: (options: TextFieldOptions) => PDFTextField,
-    i: number,
-    last?: boolean,) {
+interface EgyszeriVarazslatFullCaster {
+    addTextField: RenderTextFieldFunc;
+    i: number;
+    last?: boolean;
+}
+
+function renderEgyszeriVarazslat({addTextField, i, last}: EgyszeriVarazslatFullCaster) {
     const offset = 74;
     addTextField({
         name: `varazslatlap_full_egyszeri_${i}_nev`,
@@ -112,10 +118,13 @@ function renderEgyszeriVarazslat(
     })
 }
 
-function renderEgyszeriVarazslatHalfCaster(
-    addTextField: (options: TextFieldOptions) => PDFTextField,
-    i: number,
-    last?: boolean,) {
+interface EgyszeriVarazslatHalfCaster {
+    addTextField: RenderTextFieldFunc;
+    i: number;
+    last?: boolean;
+}
+
+function renderEgyszeriVarazslatHalfCaster({addTextField, i, last}: EgyszeriVarazslatHalfCaster,) {
     const offset = 91;
     addTextField({
         name: `varazslatlap_half_egyszeri_${i}_nev`,
@@ -178,7 +187,7 @@ function renderEgyszeriVarazslatHalfCaster(
     })
 }
 
-export function renderFullCasterVarazslatlap(addTextField: (options: TextFieldOptions) => PDFTextField) {
+export function renderFullCasterVarazslatlap(addTextField: RenderTextFieldFunc) {
     addTextField({
         name: 'varazslatlap_full_nev_faj_osztaly',
         x: 56,
@@ -194,19 +203,19 @@ export function renderFullCasterVarazslatlap(addTextField: (options: TextFieldOp
         h: 36,
     })
 
-    renderPreparedSpells(addTextField, 'varazslatlap_full', 0, 0, 0, 7);
-    renderPreparedSpells(addTextField, 'varazslatlap_full',1, 247, -20, 6, true);
-    renderPreparedSpells(addTextField, 'varazslatlap_full',2, 0, -170, 5, true);
-    renderPreparedSpells(addTextField, 'varazslatlap_full',3, 247, -170, 5, true);
-    renderPreparedSpells(addTextField, 'varazslatlap_full',4, 0, -301, 3 );
-    renderPreparedSpells(addTextField, 'varazslatlap_full',5, 247, -301, 3 );
+    renderPreparedSpells({addTextField : addTextField, prefix : 'varazslatlap_full', varazslatszint : 0, xOffset : 0, yOffset : 0, max : 7});
+    renderPreparedSpells({addTextField : addTextField, prefix : 'varazslatlap_full', varazslatszint : 1, xOffset : 247, yOffset : -20, max : 6, hasBonusz : true});
+    renderPreparedSpells({addTextField : addTextField, prefix : 'varazslatlap_full', varazslatszint : 2, xOffset : 0, yOffset : -170, max : 5, hasBonusz : true});
+    renderPreparedSpells({addTextField : addTextField, prefix : 'varazslatlap_full', varazslatszint : 3, xOffset : 247, yOffset : -170, max : 5, hasBonusz : true});
+    renderPreparedSpells({addTextField : addTextField, prefix : 'varazslatlap_full', varazslatszint : 4, xOffset : 0, yOffset : -301, max : 3} );
+    renderPreparedSpells({addTextField : addTextField, prefix : 'varazslatlap_full', varazslatszint : 5, xOffset : 247, yOffset : -301, max : 3} );
 
-    renderEgyszeriVarazslat(addTextField,0);
-    renderEgyszeriVarazslat(addTextField,1);
-    renderEgyszeriVarazslat(addTextField,2, true);
+    renderEgyszeriVarazslat({addTextField : addTextField, i : 0});
+    renderEgyszeriVarazslat({addTextField : addTextField, i : 1});
+    renderEgyszeriVarazslat({addTextField : addTextField, i : 2, last : true});
 }
 
-export function renderHalfCasterVarazslatlap(addTextField: (options: TextFieldOptions) => PDFTextField) {
+export function renderHalfCasterVarazslatlap(addTextField: RenderTextFieldFunc) {
     addTextField({
         name: 'varazslatlap_half_nev_faj_osztaly',
         x: 56,
@@ -222,13 +231,13 @@ export function renderHalfCasterVarazslatlap(addTextField: (options: TextFieldOp
         h: 36,
     })
 
-    renderPreparedSpells(addTextField, 'varazslatlap_half',0, 0, -3, 5);
-    renderPreparedSpells(addTextField, 'varazslatlap_half',1, 247, -3, 5);
-    renderPreparedSpells(addTextField, 'varazslatlap_half',2, 0, -133, 4);
-    renderPreparedSpells(addTextField, 'varazslatlap_half',3, 247, -133, 3);
+    renderPreparedSpells({addTextField : addTextField, prefix : 'varazslatlap_half', varazslatszint : 0, xOffset : 0, yOffset : -3, max : 5});
+    renderPreparedSpells({addTextField : addTextField, prefix : 'varazslatlap_half', varazslatszint : 1, xOffset : 247, yOffset : -3, max : 5});
+    renderPreparedSpells({addTextField : addTextField, prefix : 'varazslatlap_half', varazslatszint : 2, xOffset : 0, yOffset : -133, max : 4});
+    renderPreparedSpells({addTextField : addTextField, prefix : 'varazslatlap_half', varazslatszint : 3, xOffset : 247, yOffset : -133, max : 3});
 
-    renderEgyszeriVarazslatHalfCaster(addTextField,0);
-    renderEgyszeriVarazslatHalfCaster(addTextField,1);
-    renderEgyszeriVarazslatHalfCaster(addTextField,2);
-    renderEgyszeriVarazslatHalfCaster(addTextField,3, true);
+    renderEgyszeriVarazslatHalfCaster({addTextField : addTextField, i : 0});
+    renderEgyszeriVarazslatHalfCaster({addTextField : addTextField, i : 1});
+    renderEgyszeriVarazslatHalfCaster({addTextField : addTextField, i : 2});
+    renderEgyszeriVarazslatHalfCaster({addTextField : addTextField, i : 3, last : true});
 }
